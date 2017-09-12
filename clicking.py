@@ -10,15 +10,37 @@ def capsing():
         #
 
 
-def alerter():
-    autopy.alert.alert('Helloka!')
+def alerter(text):
+    autopy.alert.alert(text)
 
 
-def clicker():
-    time.sleep(5)
-    for x in range (0, 10):
+def move_middle():
+    autopy.mouse.move(500, 500)
+
+
+def move_sidebar():
+    autopy.mouse.move(950, 325)
+
+
+def clicker(number):
+    for x in range(0, number):
         autopy.mouse.click(autopy.mouse.LEFT_BUTTON)
-        time.sleep(1)
+        time.sleep(0.1)
 
 
-clicker()
+def buy_monster():
+    color = autopy.screen.get_color(950, 325)
+    print color
+
+
+def main(rounds):
+    time.sleep(5)
+    for x in range(0, rounds):
+        move_middle()
+        clicker(10)
+        move_sidebar()
+        clicker(5)
+        # buy_monster()
+
+
+main(20)
