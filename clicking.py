@@ -1,5 +1,7 @@
 import autopy
 import time
+import math
+import random
 
 
 def capsing():
@@ -29,8 +31,20 @@ def clicker(number):
 
 
 def buy_monster():
-    color = autopy.screen.get_color(950, 325)
-    print color
+    level_up = autopy.bitmap.Bitmap.open('screens/level_up.png')
+    pos = autopy.bitmap.capture_screen().find_bitmap(level_up)
+    if pos is None:
+        print('Continuing')
+    else:
+        autopy.mouse.move(pos[0]+25, pos[1]+25)
+        time.sleep(0.2)
+        clicker(2)
+
+
+def collect():
+    for x in range(300):
+        autopy.mouse.move(500, 500+x)
+        time.sleep(0.0001)
 
 
 def main(rounds):
@@ -38,9 +52,14 @@ def main(rounds):
     for x in range(0, rounds):
         move_middle()
         clicker(10)
-        move_sidebar()
+        # move_sidebar()
         clicker(5)
-        # buy_monster()
+        buy_monster()
 
 
-main(20)
+# main(100)
+
+time.sleep(0.5)
+collect()
+
+# todo: lescrollozni, utána körbenézni, majd visszascrollozni, kell még fel/le nyíl és buy screenshot
